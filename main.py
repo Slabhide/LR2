@@ -52,26 +52,27 @@ def ratings_checking(game_list):
     return ((ratings == 'да') and (game_list[0] > game_list[1])) or (ratings == '')
 
 
-with open('steam.csv', encoding='utf-8') as f, \
-        open('result.txt', 'w', encoding='utf-8') as f1:
-    reader = csv.reader(f)
-    for line in reader:
-        if line[0] == 'appid':
-            continue
+if __name__ == '__main__':
+    with open('steam.csv', encoding='utf-8') as f, \
+            open('result.txt', 'w', encoding='utf-8') as f1:
+        reader = csv.reader(f)
+        for line in reader:
+            if line[0] == 'appid':
+                continue
 
-        game_genre_in = line[9].split(';') and line[10].split(';')
-        game_category_in = line[8].split(';')
-        game_developer_in = line[4].split(';')
-        game_platform_in = line[6].split(';')
-        game_year_in = line[2].split('-')[0]
-        game_cost_in = float(line[17])
-        game_ratings_in = [int(line[12]), int(line[13])]
+            game_genre_in = line[9].split(';') and line[10].split(';')
+            game_category_in = line[8].split(';')
+            game_developer_in = line[4].split(';')
+            game_platform_in = line[6].split(';')
+            game_year_in = line[2].split('-')[0]
+            game_cost_in = float(line[17])
+            game_ratings_in = [int(line[12]), int(line[13])]
 
-        if (genre_checking(game_genre_in) and
-                category_checking(game_category_in) and
-                developer_checking(game_developer_in) and
-                platform_checking(game_platform_in) and
-                year_checking(game_year_in) and
-                cost_checking(game_cost_in) and
-                ratings_checking(game_ratings_in)):
-            f1.write(line[1] + '\n')
+            if (genre_checking(game_genre_in) and
+                    category_checking(game_category_in) and
+                    developer_checking(game_developer_in) and
+                    platform_checking(game_platform_in) and
+                    year_checking(game_year_in) and
+                    cost_checking(game_cost_in) and
+                    ratings_checking(game_ratings_in)):
+                f1.write(line[1] + '\n')
